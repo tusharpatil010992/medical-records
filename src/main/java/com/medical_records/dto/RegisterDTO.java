@@ -21,6 +21,13 @@ public class RegisterDTO {
     @NotBlank(message = "Mobile Number is required")
     private String mobileNumber;
 
+    @NotBlank(message = "Role is required")
+    private String roles;
+
+    public void setRoles(@NotBlank(message = "Role is required") String roles) {
+        this.roles = roles;
+    }
+
     @NotBlank(message = "Username is required")
     @UniqueUsername
     private String username;
@@ -95,6 +102,10 @@ public class RegisterDTO {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public String getRoles() {
+        return roles;
     }
 
     @Override
