@@ -2,12 +2,18 @@ package com.medical_records.dto;
 
 import com.medical_records.validation.PasswordMatches;
 import com.medical_records.validation.UniqueUsername;
+import com.medical_records.validation.ValidTitle;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @PasswordMatches
 public class RegisterDTO {
+
+    @NotBlank(message = "Title is required")
+    @ValidTitle
+    private String title;
+
     @NotBlank(message = "Firstname is required")
     private String firstName;
 
@@ -20,6 +26,9 @@ public class RegisterDTO {
 
     @NotBlank(message = "Mobile Number is required")
     private String mobileNumber;
+
+    @NotBlank(message = "Department is required")
+    private String department;
 
     @NotBlank(message = "Role is required")
     private String roles;
@@ -38,11 +47,30 @@ public class RegisterDTO {
     @Size(min = 6, max = 12, message = "Password must be 6–12 characters long")
     private String confirmPassword;
 
-    public RegisterDTO(String firstName, String lastName, String email, String mobileNumber, String username, String password, String confirmPassword) {
+    public @NotBlank(message = "Title is required") String getTitle() {
+        return title;
+    }
+
+    public void setTitle(@NotBlank(message = "Title is required") String title) {
+        this.title = title;
+    }
+
+    public @NotBlank(message = "Department is required") String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(@NotBlank(message = "Department is required") String department) {
+        this.department = department;
+    }
+
+    public RegisterDTO(String title, String firstName, String lastName, String email, String mobileNumber, String department, String roles, String username, String password, String confirmPassword) {
+        this.title = title;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobileNumber = mobileNumber;
+        this.department = department;
+        this.roles = roles;
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;

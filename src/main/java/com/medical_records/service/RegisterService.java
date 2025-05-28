@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,11 +21,13 @@ public class RegisterService {
 
     public RegisterDTO register(RegisterDTO user){
         User newUser = new User();
+        newUser.setTitle(user.getTitle());
         newUser.setFirstName(user.getFirstName());
         newUser.setLastName(user.getLastName());
         newUser.setEmail(user.getEmail());
         newUser.setMobileNumber(user.getMobileNumber());
-        newUser.setRoles(List.of(user.getRoles()));
+        newUser.setRoles(String.join(", ",List.of(user.getRoles())));
+        newUser.setDepartment(user.getDepartment());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(newUser);
