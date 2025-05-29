@@ -20,7 +20,7 @@ public class AppointmentController {
     private PatientService patientService;
 
 
-    @GetMapping
+    @GetMapping("/all-patients")
     public ResponseEntity<ApiResponse<List<Patient>>> getAllPatients(){
         List<Patient> patients = patientService.getAllPatients();
         ApiResponse<List<Patient>> apiResponse = new ApiResponse<>(true,"Patient List", patients);
